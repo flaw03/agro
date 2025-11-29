@@ -1,0 +1,15 @@
+Referential:
+  type: object
+  properties:
+    id :
+      type: number
+    code:
+      type: string
+    label:
+      type: string
+    isActive:
+      type: boolean
+  required:
+    - code
+    - label
+    - isActive

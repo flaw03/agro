@@ -1,0 +1,27 @@
+post:
+  summary: Create a new user
+  operationId: createUser
+  tags:
+    - users
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            email:
+              type: string
+              format: email
+            name:
+              type: string
+          required:
+            - email
+            - name
+  responses:
+    '201':
+      description: User created successfully
+      content:
+        application/json:
+          schema:
+            $ref: '../../types/user.yaml#/User'

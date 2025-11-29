@@ -1,0 +1,21 @@
+PaginatedResult:
+  type: object
+  properties:
+    data:
+      type: array
+      items:
+        type: object
+    total:
+      type: integer
+    page:
+      type: integer
+    limit:
+      type: integer
+    totalPages:
+      type: integer
+  required:
+    - data
+    - total
+    - page
+    - limit
+    - totalPages

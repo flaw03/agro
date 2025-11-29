@@ -1,0 +1,22 @@
+QueryParams:
+  type: object
+  properties:
+    page:
+      type: integer
+      minimum: 1
+      default: 1
+    limit:
+      type: integer
+      minimum: 1
+      maximum: 100
+      default: 10
+    sortBy:
+      type: string
+    sortOrder:
+      type: string
+      enum:
+        - ASC
+        - DESC
+    filters:
+      type: object
+      additionalProperties: true

@@ -1,0 +1,16 @@
+Address:
+  type: object
+  properties:
+    street:
+      type: string
+    city:
+      type: string
+    postalCode:
+      type: string
+    country:
+      type: string
+  required:
+    - street
+    - city
+    - postalCode
+    - country

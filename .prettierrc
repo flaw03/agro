@@ -1,0 +1,27 @@
+{
+  "singleQuote": true,
+  "trailingComma": "all",
+  "printWidth": 100,
+  "tabWidth": 2,
+  "semi": true,
+  "bracketSpacing": true,
+  "arrowParens": "always",
+  "endOfLine": "lf",
+  "plugins": ["@trivago/prettier-plugin-sort-imports"],
+  "overrides": [
+    {
+      "files": "*.ts",
+      "options": {
+        "parser": "babel-ts"
+      }
+    }
+  ],
+  "importOrder": [
+    "^@nestjs/(.*)$",
+    "^typeorm$",
+    "^rxjs(/(.*))?$",
+    "^[./]"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
+}

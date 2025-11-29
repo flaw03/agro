@@ -1,0 +1,16 @@
+User:
+  type: object
+  properties:
+    id:
+      type: string
+    email:
+      type: string
+      format: email
+    name:
+      type: string
+    adresse:
+      type: Address
+      $ref: './address.yaml#/Address'
+  required:
+    - id
+    - email

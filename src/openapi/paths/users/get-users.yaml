@@ -1,0 +1,15 @@
+
+get:
+  summary: Get all users
+  operationId: getUsers
+  tags:
+    - users
+  responses:
+    '200':
+      description: List of users
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../../types/user.yaml#/User'
