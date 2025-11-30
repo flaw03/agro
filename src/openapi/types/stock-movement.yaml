@@ -1,0 +1,13 @@
+StockMovement:
+  type: object
+  properties:
+    type:
+      type: string
+      enum: [ENTREE, SORTIE]
+    quantite:
+      type: number
+    motif:
+      type: string
+  required:
+    - type
+    - quantite
