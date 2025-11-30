@@ -91,26 +91,27 @@
       "json",
       "ts"
     ],
-    "rootDir": "src",
+    "rootDir": ".",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
     "collectCoverageFrom": [
-      "**/*.(t|j)s",
-      "!**/*.spec.ts",
-      "!**/*.e2e-spec.ts",
-      "!**/node_modules/**",
-      "!**/dist/**",
-      "!**/migrations/**",
-      "!**/scripts/**"
+      "src/**/*.(t|j)s",
+      "!src/**/*.spec.ts",
+      "!src/**/*.e2e-spec.ts",
+      "!src/migrations/**",
+      "!src/scripts/**"
     ],
-    "coverageDirectory": "../coverage",
+    "coverageDirectory": "./coverage",
     "coverageReporters": [
       "text",
       "lcov",
       "html"
     ],
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "moduleNameMapper": {
+      "^src/(.*)$": "<rootDir>/src/$1"
+    }
   }
 }
