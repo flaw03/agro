@@ -1,0 +1,39 @@
+RawMaterial:
+  type: object
+  properties:
+    id:
+      type: string
+    nom:
+      type: string
+    categorie:
+      type: Category
+      $ref: './category.yaml#/Category'
+    fournisseur:
+      type: string
+    prix:
+      type: number
+    stockInitial:
+      type: number
+    stockActuel:
+      type: number
+    unite:
+      type: string
+    isActive:
+      type: boolean
+    createdAt:
+      type: string
+      format: date-time
+    updatedAt:
+      type: string
+      format: date-time
+  required:
+    - id
+    - nom
+    - categorie
+    - fournisseur
+    - prix
+    - stockInitial
+    - stockActuel
+    - isActive
+    - createdAt
+    - updatedAt

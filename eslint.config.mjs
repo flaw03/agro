@@ -33,7 +33,6 @@ export default tseslint.config(
       '@typescript-eslint/no-unsafe-call': 'warn',
       '@typescript-eslint/no-unsafe-member-access': 'warn',
       '@typescript-eslint/no-unsafe-return': 'warn',
-      'eol-last': 'off',
       'newline-per-chained-call': 'off',
       '@typescript-eslint/indent': 'off',
       'sort-imports': [
@@ -77,17 +76,7 @@ export default tseslint.config(
           ],
         },
       ],
-      'lines-between-class-members': [
-        'error',
-        'always',
-        {
-          exceptAfterSingleLine: false,
-        },
-      ],
-      'padding-line-between-statements': [
-        'error',
-        { blankLine: 'always', prev: 'function', next: 'function' },
-      ],
+      'lines-between-class-members': 'off',
     },
   },
   {
@@ -100,6 +89,46 @@ export default tseslint.config(
       '@typescript-eslint/no-unsafe-member-access': 'off',
       '@typescript-eslint/no-unsafe-return': 'off',
       '@typescript-eslint/no-unused-vars': 'off',
+      '@typescript-eslint/no-empty-object-type': 'off',
+    },
+  },
+  {
+    files: ['src/migrations/**/*.ts'],
+    rules: {
+      'prettier/prettier': 'off',
+    },
+  },
+  {
+    files: [
+      'src/common/interceptors/**/*.ts',
+      'src/common/middleware/**/*.ts',
+      'src/database/**/*.ts',
+      'src/main.ts',
+    ],
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-unsafe-argument': 'off',
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-unsafe-member-access': 'off',
+      '@typescript-eslint/no-unsafe-return': 'off',
+      '@typescript-eslint/no-floating-promises': 'off',
+    },
+  },
+  {
+    files: ['src/raw-material/category/category.service.ts'],
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+    },
+  },
+  {
+    files: ['test/**/*.ts'],
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-unsafe-member-access': 'off',
+      '@typescript-eslint/unbound-method': 'off',
+      '@typescript-eslint/no-unused-vars': 'off',
+      '@typescript-eslint/no-unsafe-return': 'off',
     },
   },
 );

@@ -11,7 +11,14 @@ function ensureDir(dirPath) {
   }
 }
 
-function yamlTypeToTS(propSchema, required = false) {
+function toPascalCase(str) {
+  return str
+    .split(/[-_]/)
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join('');
+}
+
+function yamlTypeToTS(propSchema, propName = '', parentTypeName = '', enums = new Map()) {
   // Handle $ref to other types
   if (propSchema.$ref) {
     const refMatch = propSchema.$ref.match(/\.\/(.+)\.yaml#\/(.+)/);
@@ -23,9 +30,17 @@ function yamlTypeToTS(propSchema, required = false) {
   const type = propSchema.type;
   const format = propSchema.format;
 
+  // Handle enums
+  if (propSchema.enum && Array.isArray(propSchema.enum)) {
+    const enumName = `${parentTypeName}${toPascalCase(propName)}`;
+    enums.set(enumName, propSchema.enum);
+    return enumName;
+  }
+
   switch (type) {
     case "string":
       if (format === "email") return "string";
+      if (format === "date-time") return "string";
       return "string";
     case "number":
     case "integer":
@@ -34,7 +49,7 @@ function yamlTypeToTS(propSchema, required = false) {
       return "boolean";
     case "array":
       if (propSchema.items) {
-        const itemType = yamlTypeToTS(propSchema.items, true);
+        const itemType = yamlTypeToTS(propSchema.items, propName, parentTypeName, enums);
         return `Array<${itemType}>`;
       }
       return "Array<any>";
@@ -46,15 +61,36 @@ function yamlTypeToTS(propSchema, required = false) {
 }
 
 function generateInterface(typeName, schema, imports = new Set()) {
-  const properties = schema.properties || {};
-  const requiredFields = schema.required || [];
+  let extendsTypes = [];
+  let properties = schema.properties || {};
+  let requiredFields = schema.required || [];
+  const enums = new Map();
+
+  // Handle allOf (inheritance/composition)
+  if (schema.allOf) {
+    for (const item of schema.allOf) {
+      if (item.$ref) {
+        // This is an extends reference
+        const refMatch = item.$ref.match(/\.\/(.+)\.yaml#\/(.+)/);
+        if (refMatch) {
+          const [, fileName, refTypeName] = refMatch;
+          extendsTypes.push(refTypeName);
+          imports.add({ fileName, typeName: refTypeName });
+        }
+      } else if (item.properties) {
+        // Additional properties defined inline
+        properties = { ...properties, ...item.properties };
+        requiredFields = [...requiredFields, ...(item.required || [])];
+      }
+    }
+  }
 
   let interfaceCode = '';
 
   for (const [propName, propSchema] of Object.entries(properties)) {
     const isRequired = requiredFields.includes(propName);
     const optional = isRequired ? "" : "?";
-    const tsType = yamlTypeToTS(propSchema, isRequired);
+    const tsType = yamlTypeToTS(propSchema, propName, typeName, enums);
 
     // If the type is a reference to another type, add it to imports
     if (propSchema.$ref) {
@@ -68,7 +104,16 @@ function generateInterface(typeName, schema, imports = new Set()) {
     interfaceCode += `  ${propName}${optional}: ${tsType};\n`;
   }
 
-  return { interfaceCode, imports };
+  return { interfaceCode, imports, extendsTypes, enums };
+}
+
+function generateEnum(enumName, enumValues) {
+  let enumCode = `export enum ${enumName} {\n`;
+  for (const value of enumValues) {
+    enumCode += `  ${value} = '${value}',\n`;
+  }
+  enumCode += '}\n';
+  return enumCode;
 }
 
 async function processFile(file) {
@@ -83,23 +128,44 @@ async function processFile(file) {
   const typeName = Object.keys(parsed)[0];
   const schema = parsed[typeName];
 
-  // Generate TypeScript interface
-  const imports = new Set();
-  const { interfaceCode, imports: detectedImports } = generateInterface(typeName, schema, imports);
-
-  // Build the final TypeScript code with imports
   let tsCode = '';
 
-  if (detectedImports.size > 0) {
-    const importStatements = Array.from(detectedImports)
-      .map(({ fileName: importFileName, typeName: importTypeName }) =>
-        `import type { ${importTypeName} } from './${importFileName}';`
-      )
-      .join('\n');
-    tsCode = `${importStatements}\n\n`;
-  }
+  // Check if this is a root-level enum definition
+  if (schema.type === 'string' && schema.enum && Array.isArray(schema.enum)) {
+    // Generate standalone enum
+    tsCode = generateEnum(typeName, schema.enum);
+  } else {
+    // Generate TypeScript interface
+    const imports = new Set();
+    const { interfaceCode, imports: detectedImports, extendsTypes, enums } = generateInterface(typeName, schema, imports);
 
-  tsCode += `export interface ${typeName} {\n${interfaceCode}}\n`;
+    if (detectedImports.size > 0) {
+      const importStatements = Array.from(detectedImports)
+        .map(({ fileName: importFileName, typeName: importTypeName }) =>
+          `import type { ${importTypeName} } from './${importFileName}';`
+        )
+        .join('\n');
+      tsCode = `${importStatements}\n\n`;
+    }
+
+    // Generate enums first
+    if (enums.size > 0) {
+      for (const [enumName, enumValues] of enums) {
+        tsCode += generateEnum(enumName, enumValues);
+        tsCode += '\n';
+      }
+    }
+
+    // Build interface declaration with extends if applicable
+    const extendsClause = extendsTypes.length > 0 ? ` extends ${extendsTypes.join(', ')}` : '';
+
+    if (interfaceCode.trim()) {
+      tsCode += `export interface ${typeName}${extendsClause} {\n${interfaceCode}}\n`;
+    } else {
+      // If there are no additional properties, just extend
+      tsCode += `export interface ${typeName}${extendsClause} {}\n`;
+    }
+  }
 
   // Write to file
   const outputPath = path.join(OUTPUT_DIR, `${fileName}.ts`);
@@ -110,6 +176,12 @@ async function processFile(file) {
 
 async function generateTypes() {
   console.log("\n🚀 Generating TypeScript interfaces from OpenAPI types");
+
+  // Clean output directory before generation
+  if (fs.existsSync(OUTPUT_DIR)) {
+    console.log("🧹 Cleaning output directory...");
+    fs.rmSync(OUTPUT_DIR, { recursive: true, force: true });
+  }
 
   ensureDir(OUTPUT_DIR);
 

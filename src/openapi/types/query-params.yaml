@@ -13,10 +13,8 @@ QueryParams:
     sortBy:
       type: string
     sortOrder:
-      type: string
-      enum:
-        - ASC
-        - DESC
+      type: SortOrder
+      $ref: './sort-order.yaml#/SortOrder'
     filters:
       type: object
       additionalProperties: true

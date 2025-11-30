@@ -6,7 +6,7 @@ export interface IReferentialController<Dto> extends IController<Dto, Dto, Parti
 
   getAllReferentials(activeOnly?: boolean): Observable<Dto[]>;
 
-  getByCode(code: string): Observable<Dto | null>;
+  getByCode(code: string): Observable<Dto>;
 
   activateReferential(id: string | number): Observable<Dto>;
 

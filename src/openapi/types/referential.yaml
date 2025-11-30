@@ -7,8 +7,6 @@ Referential:
       type: string
     label:
       type: string
-    isActive:
-      type: boolean
   required:
     - code
     - label

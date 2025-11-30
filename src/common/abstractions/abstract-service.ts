@@ -2,19 +2,23 @@ import { DeepPartial, FindOptionsWhere, Repository } from 'typeorm';
 
 import { Observable, from, map, switchMap, throwError } from 'rxjs';
 
-import type { PaginatedResult as PaginatedResultBase, QueryParams } from '../dto';
 import { AbstractFilter } from './abstract-filter';
 import { AbstractMapper } from './abstract.mapper';
-import { SortOrder } from './sort-order.enum';
+import { QueryParams } from '../dto/query-params';
+import { SortOrder } from '../dto/sort-order';
 
-export interface PaginatedResult<T> extends Omit<PaginatedResultBase, 'data'> {
+export interface PaginatedResult<T> {
   data: T[];
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
 }
 
 export abstract class AbstractService<
   Entity extends { id: string | number },
   Dto,
-  CreateDto = Dto,
+  CreateDto = Omit<Dto, 'id'>,
   UpdateDto = Partial<CreateDto>,
 > {
   protected constructor(
