@@ -12,7 +12,6 @@ export abstract class AbstractReferentialMapper<
       id: entity.id as number,
       code: entity.code,
       label: entity.label,
-      isActive: entity.isActive ?? true,
       ...this.mapAdditionalFieldsToDto(entity),
     } as Dto;
   }
@@ -21,7 +20,6 @@ export abstract class AbstractReferentialMapper<
     const baseEntity = {
       code: (dto as any).code,
       label: (dto as any).label,
-      isActive: (dto as any).isActive ?? true,
       ...this.mapAdditionalFieldsToEntity(dto),
     };
 

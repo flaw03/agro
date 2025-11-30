@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import type { QueryParams } from '../dto';
+import type { QueryParams } from '../dto/query-params';
 
 export interface IController<Dto, CreateDto = Dto, UpdateDto = Partial<CreateDto>> {
   getAll(queryParams?: QueryParams): Observable<Dto[]>;

@@ -3,6 +3,7 @@ import { AbstractController } from './abstract-controller';
 import type { AbstractReferentialService } from './abstract-referential.service';
 import { ReferentialEntity } from './referential.entity.interface';
 import { Referential } from '../dto/referential';
+import { QueryParams } from '../dto/query-params';
 
 export abstract class AbstractReferentialController<
   Entity extends ReferentialEntity,
@@ -21,23 +22,11 @@ export abstract class AbstractReferentialController<
     super(referentialService);
   }
 
-  getAllActive(): Observable<Dto[]> {
-    return this.referentialService.findAllActive();
-  }
-
-  getAllReferentials(activeOnly: boolean = false): Observable<Dto[]> {
-    return this.referentialService.findAllReferentials(activeOnly);
+  override getAll(queryParams?: QueryParams): Observable<Dto[]> {
+    return this.referentialService.findAllReferentials();
   }
 
   getByCode(code: string): Observable<Dto | null> {
     return this.referentialService.findByCode(code);
-  }
-
-  activateReferential(id: string | number): Observable<Dto> {
-    return this.referentialService.activate(id);
-  }
-
-  deactivateReferential(id: string | number): Observable<Dto> {
-    return this.referentialService.deactivate(id);
   }
 }
