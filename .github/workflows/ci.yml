@@ -12,7 +12,7 @@ env:
 
 jobs:
   lint:
-    name: Lint & Format
+    name: 🔍 Lint & Format
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -30,11 +30,11 @@ jobs:
         run: bun run lint
 
       - name: Check formatting
-        run: bun run format -- --check
+        run: bun run format:check
         continue-on-error: true
 
   test:
-    name: Unit Tests
+    name: 🧪 Unit Tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -49,7 +49,7 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Unit tests
-        run: bun run test -- --coverage
+        run: bun run test:cov
         env:
           NODE_ENV: test
           DB_TYPE: sqlite
@@ -62,7 +62,7 @@ jobs:
         continue-on-error: true
 
   test-e2e:
-    name: E2E Tests
+    name: 🌐 E2E Tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -83,7 +83,7 @@ jobs:
           DB_TYPE: sqlite
 
   typecheck:
-    name: TypeScript Check
+    name: 📝 TypeScript Check
     runs-on: ubuntu-latest
     steps:
       - name:  Checkout code
@@ -101,7 +101,7 @@ jobs:
         run: bunx tsc --noEmit
 
   security:
-    name: Security Audit
+    name: 🔒 Security Audit
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -134,7 +134,7 @@ jobs:
         with:
           bun-version: ${{ env.BUN_VERSION }}
 
-      - name: Install dependencies
+      - name: 📦 Install dependencies
         run: bun install --frozen-lockfile
 
       - name: Build
@@ -148,7 +148,7 @@ jobs:
           retention-days: 7
 
   docker:
-    name: Docker Build
+    name: 🐳 Docker Build
     runs-on: ubuntu-latest
     needs: [build]
     if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
