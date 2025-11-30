@@ -24,7 +24,7 @@ export class RawMaterialMapper extends AbstractMapper<RawMaterialEntity, RawMate
       isActive: entity.isActive,
       stockInitial: Number(entity.stockInitial),
       stockActuel: Number(entity.stockActuel),
-      unite: entity.unite ?? undefined,
+      unite: entity.unite,
       createdAt: entity.createdAt.toISOString(),
       updatedAt: entity.updatedAt.toISOString(),
     };
@@ -38,7 +38,7 @@ export class RawMaterialMapper extends AbstractMapper<RawMaterialEntity, RawMate
     entity.prix = dto.prix;
     entity.stockInitial = dto.stockInitial;
     entity.stockActuel = dto.stockInitial;
-    entity.unite = dto.unite ?? null;
+    entity.unite = dto.unite;
     return entity;
   }
 }

@@ -18,7 +18,7 @@
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "fix": "bun run fix:eslint && bun run fix:prettier",
-    "fix:prettier": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\" ",
+    "fix:prettier": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\" --log-level warn",
     "fix:eslint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",

@@ -26,7 +26,7 @@ export abstract class AbstractReferentialController<
     return this.referentialService.findAllReferentials();
   }
 
-  getByCode(code: string): Observable<Dto | null> {
+  getByCode(code: string): Observable<Dto> {
     return this.referentialService.findByCode(code);
   }
 }

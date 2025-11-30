@@ -25,7 +25,7 @@ export abstract class AbstractReferentialService<
     return this.executeQuery(queryBuilder);
   }
 
-  findByCode(code: string): Observable<Dto | null> {
+  findByCode(code: string): Observable<Dto> {
     return this.executeQueryForSingle(
       this.repository.createQueryBuilder('entity').where('entity.code = :code', { code }),
     );
@@ -37,9 +37,9 @@ export abstract class AbstractReferentialService<
     );
   }
 
-  private executeQueryForSingle(queryBuilder: any): Observable<Dto | null> {
+  private executeQueryForSingle(queryBuilder: any): Observable<Dto> {
     return from(queryBuilder.getOne()).pipe(
-      map((entity: Entity | null) => (entity ? this.mapper.toDto(entity) : null)),
+      map((entity: Entity) => (entity ? this.mapper.toDto(entity) : null)),
     );
   }
 }

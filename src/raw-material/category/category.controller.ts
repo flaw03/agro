@@ -22,7 +22,7 @@ export class CategoryController extends AbstractReferentialController<CategoryEn
   }
 
   @Get(':code')
-  getOne(@Param('code') code: string): Observable<Category | null> {
+  getOne(@Param('code') code: string): Observable<Category> {
     return this.getByCode(code);
   }
 

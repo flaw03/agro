@@ -46,7 +46,7 @@ export class RawMaterialEntity {
   stockActuel: number;
 
   @Column({ type: 'varchar', length: 50, nullable: true })
-  unite: string | null; // kg, L, units, etc.
+  unite: string; // kg, L, units, etc.
 
   @Column({ type: 'boolean', default: true, name: 'is_active' })
   isActive: boolean;
