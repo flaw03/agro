@@ -1,0 +1,5 @@
+SortOrder:
+  type: string
+  enum:
+    - ASC
+    - DESC
