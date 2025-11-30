@@ -1,0 +1,34 @@
+[
+  {
+    "code": "FRUITS",
+    "label": "Fruits"
+  },
+  {
+    "code": "LEGUMES",
+    "label": "Légumes"
+  },
+  {
+    "code": "LAIT",
+    "label": "Lait et produits laitiers"
+  },
+  {
+    "code": "VIANDE",
+    "label": "Viandes"
+  },
+  {
+    "code": "POISSON",
+    "label": "Poissons et fruits de mer"
+  },
+  {
+    "code": "CEREALES",
+    "label": "Céréales et farines"
+  },
+  {
+    "code": "EPICES",
+    "label": "Épices et condiments"
+  },
+  {
+    "code": "HUILES",
+    "label": "Huiles et matières grasses"
+  }
+]

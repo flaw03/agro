@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { getDatabaseConfig } from './config/database.config';
+import { SeederModule } from './database/seeder.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { getDatabaseConfig } from './config/database.config';
       envFilePath: '.env',
     }),
     TypeOrmModule.forRoot(getDatabaseConfig()),
+    SeederModule,
   ],
   controllers: [AppController],
   providers: [AppService],
