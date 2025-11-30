@@ -97,6 +97,9 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
+      - name: Type build type
+        run: bun run generate:types
+
       - name: Type check
         run: bunx tsc --noEmit
 
