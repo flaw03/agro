@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import type { QueryParams } from '../dto';
+import type { QueryParams } from '../dto/query-params';
 import { AbstractService } from './abstract-service';
 import { IController } from './i-controller.interface';
 

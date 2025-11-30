@@ -1,0 +1,154 @@
+[
+  {
+    "nom": "Pommes Golden",
+    "categorieCode": "FRUITS",
+    "fournisseur": "Ferme Martin",
+    "prix": 2.5,
+    "stockInitial": 150,
+    "unite": "kg"
+  },
+  {
+    "nom": "Bananes",
+    "categorieCode": "FRUITS",
+    "fournisseur": "Import Tropical",
+    "prix": 1.8,
+    "stockInitial": 200,
+    "unite": "kg"
+  },
+  {
+    "nom": "Fraises",
+    "categorieCode": "FRUITS",
+    "fournisseur": "Ferme des Vergers",
+    "prix": 4.5,
+    "stockInitial": 50,
+    "unite": "kg"
+  },
+  {
+    "nom": "Tomates",
+    "categorieCode": "LEGUMES",
+    "fournisseur": "Maraîcher Local",
+    "prix": 3.2,
+    "stockInitial": 100,
+    "unite": "kg"
+  },
+  {
+    "nom": "Carottes",
+    "categorieCode": "LEGUMES",
+    "fournisseur": "Ferme Bio du Coin",
+    "prix": 1.5,
+    "stockInitial": 120,
+    "unite": "kg"
+  },
+  {
+    "nom": "Oignons",
+    "categorieCode": "LEGUMES",
+    "fournisseur": "Maraîcher Local",
+    "prix": 1.2,
+    "stockInitial": 80,
+    "unite": "kg"
+  },
+  {
+    "nom": "Lait entier",
+    "categorieCode": "LAIT",
+    "fournisseur": "Laiterie du Terroir",
+    "prix": 1.1,
+    "stockInitial": 500,
+    "unite": "L"
+  },
+  {
+    "nom": "Crème fraîche",
+    "categorieCode": "LAIT",
+    "fournisseur": "Laiterie du Terroir",
+    "prix": 3.5,
+    "stockInitial": 100,
+    "unite": "L"
+  },
+  {
+    "nom": "Beurre",
+    "categorieCode": "LAIT",
+    "fournisseur": "Laiterie du Terroir",
+    "prix": 8.5,
+    "stockInitial": 50,
+    "unite": "kg"
+  },
+  {
+    "nom": "Bœuf haché",
+    "categorieCode": "VIANDE",
+    "fournisseur": "Boucherie Durand",
+    "prix": 12.5,
+    "stockInitial": 30,
+    "unite": "kg"
+  },
+  {
+    "nom": "Poulet entier",
+    "categorieCode": "VIANDE",
+    "fournisseur": "Élevage Fermier",
+    "prix": 8.0,
+    "stockInitial": 25,
+    "unite": "unité"
+  },
+  {
+    "nom": "Saumon frais",
+    "categorieCode": "POISSON",
+    "fournisseur": "Poissonnerie du Port",
+    "prix": 18.0,
+    "stockInitial": 15,
+    "unite": "kg"
+  },
+  {
+    "nom": "Crevettes",
+    "categorieCode": "POISSON",
+    "fournisseur": "Import Océan",
+    "prix": 22.0,
+    "stockInitial": 10,
+    "unite": "kg"
+  },
+  {
+    "nom": "Farine de blé T55",
+    "categorieCode": "CEREALES",
+    "fournisseur": "Moulin des Champs",
+    "prix": 1.2,
+    "stockInitial": 500,
+    "unite": "kg"
+  },
+  {
+    "nom": "Riz basmati",
+    "categorieCode": "CEREALES",
+    "fournisseur": "Import Asie",
+    "prix": 3.5,
+    "stockInitial": 200,
+    "unite": "kg"
+  },
+  {
+    "nom": "Sel fin",
+    "categorieCode": "EPICES",
+    "fournisseur": "Salins du Midi",
+    "prix": 0.8,
+    "stockInitial": 100,
+    "unite": "kg"
+  },
+  {
+    "nom": "Poivre noir moulu",
+    "categorieCode": "EPICES",
+    "fournisseur": "Épices du Monde",
+    "prix": 15.0,
+    "stockInitial": 20,
+    "unite": "kg"
+  },
+  {
+    "nom": "Huile d'olive",
+    "categorieCode": "HUILES",
+    "fournisseur": "Provence Huiles",
+    "prix": 12.0,
+    "stockInitial": 80,
+    "unite": "L"
+  },
+  {
+    "nom": "Huile de tournesol",
+    "categorieCode": "HUILES",
+    "fournisseur": "Huilerie Locale",
+    "prix": 4.5,
+    "stockInitial": 150,
+    "unite": "L"
+  }
+]

@@ -3,8 +3,8 @@ import { Repository } from 'typeorm';
 import { AbstractMapper } from './abstract.mapper';
 import { AbstractService } from './abstract-service';
 import { ReferentialEntity } from './referential.entity.interface';
-import { SortOrder } from './sort-order.enum';
 import { Referential } from '../dto/referential';
+import { SortOrder } from '../dto/sort-order';
 
 export abstract class AbstractReferentialService<
   Entity extends ReferentialEntity,
@@ -19,38 +19,16 @@ export abstract class AbstractReferentialService<
     super(repository, mapper);
   }
 
-  findAllActive(): Observable<Dto[]> {
-    return this.findAllReferentials(true);
-  }
-
-  findAllReferentials(activeOnly: boolean = false): Observable<Dto[]> {
+  findAllReferentials(): Observable<Dto[]> {
     let queryBuilder = this.repository.createQueryBuilder('entity');
-
-    if (activeOnly) {
-      queryBuilder = queryBuilder.where('entity.isActive = :isActive', { isActive: true });
-    }
-
     queryBuilder = queryBuilder.orderBy('entity.label', SortOrder.ASC);
-
     return this.executeQuery(queryBuilder);
   }
 
-  findByCode(code: string): Observable<Dto | null> {
+  findByCode(code: string): Observable<Dto> {
     return this.executeQueryForSingle(
       this.repository.createQueryBuilder('entity').where('entity.code = :code', { code }),
     );
-  }
-
-  activate(id: string | number): Observable<Dto> {
-    return this.toggleActive(id, true);
-  }
-
-  deactivate(id: string | number): Observable<Dto> {
-    return this.toggleActive(id, false);
-  }
-
-  private toggleActive(id: string | number, isActive: boolean): Observable<Dto> {
-    return this.update(id, { isActive } as UpdateDto);
   }
 
   private executeQuery(queryBuilder: any): Observable<Dto[]> {
@@ -59,9 +37,9 @@ export abstract class AbstractReferentialService<
     );
   }
 
-  private executeQueryForSingle(queryBuilder: any): Observable<Dto | null> {
+  private executeQueryForSingle(queryBuilder: any): Observable<Dto> {
     return from(queryBuilder.getOne()).pipe(
-      map((entity: Entity | null) => (entity ? this.mapper.toDto(entity) : null)),
+      map((entity: Entity) => (entity ? this.mapper.toDto(entity) : null)),
     );
   }
 }

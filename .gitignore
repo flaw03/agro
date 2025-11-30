@@ -37,6 +37,7 @@ lerna-debug.log*
 # Generated files
 src/common/generated/
 src/common/dto/
+src/generated
 # Database
 db/
 *.sqlite
