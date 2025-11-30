@@ -33,7 +33,6 @@ export default tseslint.config(
       '@typescript-eslint/no-unsafe-call': 'warn',
       '@typescript-eslint/no-unsafe-member-access': 'warn',
       '@typescript-eslint/no-unsafe-return': 'warn',
-      'eol-last': 'off',
       'newline-per-chained-call': 'off',
       '@typescript-eslint/indent': 'off',
       'sort-imports': [
@@ -83,10 +82,6 @@ export default tseslint.config(
         {
           exceptAfterSingleLine: false,
         },
-      ],
-      'padding-line-between-statements': [
-        'error',
-        { blankLine: 'always', prev: 'function', next: 'function' },
       ],
     },
   },
