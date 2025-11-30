@@ -104,6 +104,11 @@
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
+    "coveragePathIgnorePatterns": [
+      "src/generated/",
+      "/dossier_a_ignorer/",
+      "/autre_dossier_a_ignorer/"
+    ],
     "collectCoverageFrom": [
       "src/**/*.(t|j)s",
       "!src/**/*.spec.ts",

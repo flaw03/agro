@@ -1,10 +1,10 @@
 import { Observable, from, map } from 'rxjs';
 import { Repository } from 'typeorm';
-import { AbstractMapper } from './abstract.mapper';
 import { AbstractService } from './abstract-service';
 import { ReferentialEntity } from './referential.entity.interface';
 import { Referential } from '../dto/referential';
 import { SortOrder } from '../dto/sort-order';
+import { AbstractReferentialMapper } from './abstract-referential.mapper';
 
 export abstract class AbstractReferentialService<
   Entity extends ReferentialEntity,
@@ -14,7 +14,7 @@ export abstract class AbstractReferentialService<
 > extends AbstractService<Entity, Dto, CreateDto, UpdateDto> {
   protected constructor(
     protected readonly repository: Repository<Entity>,
-    protected readonly mapper: AbstractMapper<Entity, Dto, CreateDto>,
+    protected readonly mapper: AbstractReferentialMapper<Entity, Dto, CreateDto>,
   ) {
     super(repository, mapper);
   }

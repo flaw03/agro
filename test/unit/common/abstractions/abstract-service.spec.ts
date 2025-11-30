@@ -1,11 +1,5 @@
 import { Repository, SelectQueryBuilder } from 'typeorm';
-import {
-  AbstractMapper,
-  AbstractService,
-  PaginatedResult,
-  QueryParams,
-  SortOrder,
-} from '../../test-helpers';
+import { AbstractMapper, AbstractService, QueryParams, SortOrder } from '../../../index';
 import { firstValueFrom } from 'rxjs';
 
 // Entité de test

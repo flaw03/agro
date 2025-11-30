@@ -9,8 +9,14 @@ import { StockMovementType } from '../common/dto/stock-movement';
 import { RawMaterialEntity } from './raw-material.entity';
 import { RawMaterialMapper } from './raw-material.mapper';
 
+export type CreateRawMaterial = Omit<RawMaterial, 'id' | 'createdAt' | 'updatedAt'>;
+
 @Injectable()
-export class RawMaterialService extends AbstractService<RawMaterialEntity, RawMaterial> {
+export class RawMaterialService extends AbstractService<
+  RawMaterialEntity,
+  RawMaterial,
+  CreateRawMaterial
+> {
   constructor(
     @InjectRepository(RawMaterialEntity)
     protected readonly repository: Repository<RawMaterialEntity>,

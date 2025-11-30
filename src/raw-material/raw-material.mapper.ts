@@ -2,14 +2,15 @@ import { AbstractMapper } from '../common/abstractions/abstract.mapper';
 import { RawMaterialEntity } from './raw-material.entity';
 import { ReferentialMapper } from '../common/referential.mapper';
 import { RawMaterial } from '../common/dto/raw-material';
-import { Category } from '../common/dto/category';
 import { Injectable } from '@nestjs/common';
+import { Referential } from '../common/dto/referential';
+import { ReferentialEntity } from '../common/abstractions/referential.entity.interface';
 
 @Injectable()
 export class RawMaterialMapper extends AbstractMapper<RawMaterialEntity, RawMaterial> {
-  private readonly referentialMapper: ReferentialMapper;
+  private readonly referentialMapper: ReferentialMapper<ReferentialEntity, Referential>;
 
-  constructor(referentialMapper: ReferentialMapper) {
+  constructor(referentialMapper: ReferentialMapper<ReferentialEntity, Referential>) {
     super();
     this.referentialMapper = referentialMapper;
   }
@@ -18,7 +19,7 @@ export class RawMaterialMapper extends AbstractMapper<RawMaterialEntity, RawMate
     return {
       id: entity.id,
       nom: entity.nom,
-      categorie: this.referentialMapper.toDto(entity.categorie) as Category,
+      categorie: this.referentialMapper.toDto(entity.categorie),
       fournisseur: entity.fournisseur,
       prix: Number(entity.prix),
       isActive: entity.isActive,

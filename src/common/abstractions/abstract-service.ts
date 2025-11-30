@@ -18,7 +18,7 @@ export interface PaginatedResult<T> {
 export abstract class AbstractService<
   Entity extends { id: string | number },
   Dto,
-  CreateDto = Dto,
+  CreateDto = Omit<Dto, 'id'>,
   UpdateDto = Partial<CreateDto>,
 > {
   protected constructor(

@@ -1,4 +1,4 @@
-import { AbstractMapper } from '../../test-helpers';
+import { AbstractMapper } from '../../../index';
 
 // Classes de test pour simuler Entity et DTO
 class TestEntity {

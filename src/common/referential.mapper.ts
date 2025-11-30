@@ -4,4 +4,7 @@ import { Referential } from './dto/referential';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class ReferentialMapper extends AbstractReferentialMapper<ReferentialEntity, Referential> {}
+export class ReferentialMapper<
+  Entity extends ReferentialEntity,
+  Dto extends Referential,
+> extends AbstractReferentialMapper<Entity, Dto> {}

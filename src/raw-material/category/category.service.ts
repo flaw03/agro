@@ -11,9 +11,8 @@ export class CategoryService extends AbstractReferentialService<CategoryEntity, 
   constructor(
     @InjectRepository(CategoryEntity)
     protected readonly repository: Repository<CategoryEntity>,
-    mapper: ReferentialMapper,
+    protected readonly mapper: ReferentialMapper<CategoryEntity, Category>,
   ) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    super(repository, mapper as any);
+    super(repository, mapper);
   }
 }
